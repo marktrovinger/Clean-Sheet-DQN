@@ -5,10 +5,12 @@ import torch.optim as optim
 from replay_buffer import ReplayBuffer
 
 class DeepQNetwork(nn.Module):
-    def __init__(self, gamma, input_size, epsilon, n_actions, fc_input_dims, lr):
+    def __init__(self, gamma, input_size, epsilon, n_actions, fc_input_dims, lr, checkpoint_dir='tmp/dqn'):
         super.__init__(DeepQNetwork, self)
         self.gamma = gamma
         self.epsilon = epsilon
+        self.checkpoint_dir = checkpoint_dir
+        self.file_name = f'DQN-gamma: {gamma} epsilon: {epsilon} lr: {lr}'
 
         #self.replay_buffer = ReplayBuffer(memory_size)
         
@@ -37,8 +39,8 @@ class DeepQNetwork(nn.Module):
 
     # TODO: save the model 
     def save_model(self):
-        pass
+        T.save(self.state_dict(), self.file_name) 
 
     # TODO: load the model
     def load_model(self):
-        pass
+        self.load_state_dict(T.load(self.file_name))
