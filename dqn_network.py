@@ -5,12 +5,12 @@ import torch.optim as optim
 from replay_buffer import ReplayBuffer
 
 class DeepQNetwork(nn.Module):
-    def __init__(self, gamma, input_size, epsilon, n_actions, memory_size, fc_input_dims, lr):
+    def __init__(self, gamma, input_size, epsilon, n_actions, fc_input_dims, lr):
         super.__init__(DeepQNetwork, self)
         self.gamma = gamma
         self.epsilon = epsilon
 
-        self.replay_buffer = ReplayBuffer(memory_size)
+        #self.replay_buffer = ReplayBuffer(memory_size)
         
         #self.input_layer = nn.Linear(input_size, 32)
         self.conv1 = nn.Conv2d(input_size[0], 32, 8, stride=4)
@@ -30,3 +30,15 @@ class DeepQNetwork(nn.Module):
     def forward(self, state):
         x = self.conv2(F.relu(self.conv1(state)))
         x = self.conv3(F.relu(self.conv2(x)))
+        x = self.fc(x)
+        action = self.output_layer(x)
+
+        return action
+
+    # TODO: save the model 
+    def save_model(self):
+        pass
+
+    # TODO: load the model
+    def load_model(self):
+        pass
