@@ -15,7 +15,6 @@ class DQN_Agent():
 
     # TODO: implement the learning algorithmS
     def learn(self, batch_size=32):
-        if self.replay_buffer.mem_cntr < batch_size:
-            return
+        state, action, rewards, state_, done = self.replay_buffer.sample_memory(batch_size)
         
          
