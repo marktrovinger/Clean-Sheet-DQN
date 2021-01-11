@@ -7,6 +7,8 @@ if __name__ == "__main__":
     env = gym.make('CartPole-v1')
     n_games = 10000
 
+    agent = DQN_Agent(gamma=0.99, input_size=env.input_size, epsilon=1, n_actions=env.n_actions, memory_size=10000, fc_input_dims=512,lr=0.000025)
+
 
     # TODO: using our implementation, run the number of games specified
     for _ in range(n_games):
