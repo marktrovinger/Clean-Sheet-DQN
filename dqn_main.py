@@ -13,4 +13,6 @@ if __name__ == "__main__":
         pass
 
     # TODO: using the reference spinningup algo, run the same number of games
+    #       minor problem, apparently SpinningUp doesn't have DQN implementation,
+    #       so that plan won't work
     # TODO: investigate the number of games that will give good results for cartpole
